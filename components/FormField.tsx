@@ -1,13 +1,14 @@
+import { icons } from "@/constants";
+import React, { ComponentProps, FC, useState } from "react";
 import {
-  View,
+  Image,
+  Platform,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
-  Image,
+  View
 } from "react-native";
-import React, { ComponentProps, FC, useState } from "react";
-import { icons, images } from "@/constants";
 
 type FormFieldProps = ComponentProps<typeof View> & {
   title: string;
@@ -30,7 +31,7 @@ const FormField: FC<FormFieldProps> = ({
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   return (
-    <View className={`space-y-2 flex-row flex ${className}`} {...props}>
+    <View className={`space-y-2 ${className}`} {...props}>
       <Text className="text-base text-gray-100 font-pmedium">{title}</Text>
       <View style={[styles.viewInput, isFocused && styles.focusedInput]}>
         <TextInput
@@ -49,7 +50,7 @@ const FormField: FC<FormFieldProps> = ({
           <TouchableOpacity onPress={() => setShowPassword((prev) => !prev)}>
             <Image
               source={!showPassword ? icons.eyeHide : icons.eye}
-              className="size-6"
+              style={styles.eye}
               resizeMode="contain"
             />
           </TouchableOpacity>
@@ -69,9 +70,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 16,
     outline: "none",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingRight: Platform.OS === "web" ? 16 : 32,
   },
   focusedInput: {
     borderColor: "#FF9C01",
     borderWidth: 1,
+  },
+  eye: {
+    width: 20,
+    height: 20,
   },
 });
