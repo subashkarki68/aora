@@ -2,6 +2,8 @@ export type User = {
   id: string;
   email: string;
   name: string;
+  avatar: string;
+  accountId: string;
 };
 
 export type UserSignIn = {

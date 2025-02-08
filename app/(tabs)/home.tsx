@@ -1,12 +1,14 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import { useGlobalContext } from "@/context/GlobalProvider";
+import React from "react";
+import { SafeAreaView, Text } from "react-native";
 
 const Home = () => {
-    return (
-        <View>
-            <Text>Home</Text>
-        </View>
-    )
-}
+  const { user } = useGlobalContext();
+  return (
+    <SafeAreaView>
+      <Text>{user?.name}</Text>
+    </SafeAreaView>
+  );
+};
 
-export default Home
+export default Home;
